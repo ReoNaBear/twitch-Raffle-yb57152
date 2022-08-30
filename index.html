@@ -22,12 +22,13 @@
     html {
       cursor: url(./img/cursor2.webp), auto;
     }
+
     body {
       background-color: #ffffd3;
       margin: 0;
       font-family: 'Noto Sans TC', sans-serif;
       color: #0d97db;
-      
+
     }
 
     .title {
@@ -77,6 +78,7 @@
       top: 0;
       border-radius: 0px 0px calc(8vw/19.2) calc(8vw/19.2);
     }
+
     .machine-right,
     .machine-left {
       height: calc(360vw/19.2);
@@ -86,10 +88,12 @@
       background-repeat: no-repeat;
       background-size: contain;
     }
+
     .machine-left {
       background-image: url(./img/Nature_tears.png);
       left: 0;
     }
+
     .machine-right {
       background-image: url(./img/Nature_creepsmile.png);
       right: 0;
@@ -370,8 +374,9 @@
       background-image: url(./img/895286853211684895.webp);
       background-repeat: no-repeat;
       background-size: contain;
-      
+
     }
+
     .movingMelon {
       position: absolute;
       height: 99vh;
@@ -389,6 +394,7 @@
       from {
         left: -94%;
       }
+
       to {
         left: 100%;
       }
@@ -398,31 +404,50 @@
       from {
         left: 100%;
       }
+
       to {
         left: -94%;
       }
     }
 
-    .inputArea, .multipleTransform.auto, .winnerForm {
+    .inputArea,
+    .multipleTransform.auto,
+    .winnerForm {
       background-color: transparent;
       width: 100%;
+      position: relative;
     }
-    .inputArea-Background, .multipleTransform-Background, .winnerForm-Background{
+
+    .inputArea-Background,
+    .multipleTransform-Background,
+    .winnerForm-Background {
       display: flex;
       background-color: #fff;
       background-image: url(./img/Nature_LUL.png);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: right;
+      width: 100%;
+      height: 100%;
+      position: absolute;
     }
+
     .multipleTransform-Background {
       background-image: url(./img/Nature_tea.png);
     }
+
     .winnerForm-Background {
       background-image: url(./img/Nature_angry.png);
     }
 
-
+    .winnerForm-Background.melon,
+    .multipleTransform-Background.melon,
+    .inputArea-Background.melon,
+    .machine-left.melon,
+    .machine-right.melon {
+      background-image: url(./img/Nature_melonhaha.png);
+      background-color: transparent;
+    }
   </style>
 </head>
 
@@ -436,11 +461,14 @@
         <h3 class="card-title"><i class="fa-solid fa-table"></i> 資料轉換區</h3>
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示:
           可以直接複製Excel或Google試算表喔</h5>
-        <div class="inputArea-Background">
-        <textarea class="inputArea" name="excelInput" id="excelInput" cols="30" rows="10" placeholder="請輸入 名字 + 數量
+        <div style="position: relative;">
+          <div class="inputArea-Background">
+          </div>
+          <textarea class="inputArea" name="excelInput" id="excelInput" cols="30" rows="10" placeholder="請輸入 名字 + 數量
           ex:
           參加者A 2
-          參加者B 5"></textarea></div>
+          參加者B 5"></textarea>
+        </div>
         <button type="button" onclick="outputDrawList()" class="btn multipleTransformBtn">轉換名單</button>
       </div>
     </div>
@@ -453,7 +481,9 @@
         </div>
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示: 可從右上角切換成手動輸入
         </h5>
-        <div class="multipleTransform-Background">
+        <div style="position: relative;">
+          <div class="multipleTransform-Background">
+          </div>
           <textarea readonly class="multipleTransform auto" name="multipleTransform" id="multipleTransform" cols="30"
             rows="10" placeholder="格式為
             1 參加者A
@@ -489,10 +519,12 @@
           <i class="fa-solid fa-pen-to-square"></i>
           <i class="fa-solid fa-check disable"></i>
         </div>
-        <div class="winnerForm-Background">
+        <div style="position: relative;">
+          <div class="winnerForm-Background">
+          </div>
           <textarea readonly class="winnerForm" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
           <textarea class="winnerFormEdit disable" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
-          <textarea class="winnerNamesForm disable" name="winnerForm" id="winnerForm" cols="10" rows="2";></textarea>
+          <textarea class="winnerNamesForm disable" name="winnerForm" id="winnerForm" cols="10" rows="2" ;></textarea>
         </div>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
           <div class="col-6">
@@ -543,7 +575,7 @@
           <div class="ellipse"></div>
           <div class="rectangle"></div>
         </div>
-      </div>-
+      </div>
     </div>
 
   </div>
@@ -976,25 +1008,46 @@
 
   ///搞耍時刻
   let melonChange = document.querySelector('.melonChange')
+  let winnerFormBackground = document.querySelector('.winnerForm-Background')
+  let transformBackground = document.querySelector('.multipleTransform-Background')
+  let inputAreaBackground = document.querySelector('.inputArea-Background')
+  let machineL = document.querySelector('.machine-left')
+  let machineR = document.querySelector('.machine-right')
   let melonCount = 0
-  melonChange.addEventListener('click',function(){
+  let melonState = false
+  melonChange.addEventListener('click', function () {
     melonCount = melonCount + 1
-    if(melonCount <= 3){
+    if (melonCount <= 3) {
       toastr.success(`已哈哈${melonCount}次`)
-    } else if (melonCount <= 5){
+    } else if (melonCount <= 5) {
       toastr.warning(`我看你很會哈哈喔 ${melonCount}`)
-    } else if (melonCount <= 7){
+    } else if (melonCount <= 7) {
       toastr.error(`到底要哈幾次 ${melonCount}`)
-    } else if(melonCount <= 8){
+    } else if (melonCount <= 8) {
       toastr.success(`自然好棒`)
-    } else if(melonCount <= 9){
+    } else if (melonCount <= 9) {
       toastr.success(`自然可愛`)
-    } else if(melonCount <= 10){
+    } else if (melonCount <= 10) {
       toastr.success(`好喜歡自然!!!!!`)
-    } else{
+    } else {
       toastr.success(`暈了暈了暈了`)
+      melonCount = 0
+      melonState = !melonState
     }
-  
+    if (melonState) {
+      winnerFormBackground.classList.add('melon')
+      transformBackground.classList.add('melon')
+      inputAreaBackground.classList.add('melon')
+      machineL.classList.add('melon')
+      machineR.classList.add('melon')
+    } else {
+      winnerFormBackground.classList.remove('melon')
+      transformBackground.classList.remove('melon')
+      inputAreaBackground.classList.remove('melon')
+      machineL.classList.remove('melon')
+      machineR.classList.remove('melon')
+    }
+
   })
 
 
