@@ -19,11 +19,15 @@
 
   <title>熊熊的圖奇抽獎小網站</title>
   <style>
+    html {
+      cursor: url(./img/cursor2.webp), auto;
+    }
     body {
       background-color: #ffffd3;
       margin: 0;
       font-family: 'Noto Sans TC', sans-serif;
       color: #0d97db;
+      
     }
 
     .title {
@@ -72,7 +76,23 @@
       left: 0;
       top: 0;
       border-radius: 0px 0px calc(8vw/19.2) calc(8vw/19.2);
-
+    }
+    .machine-right,
+    .machine-left {
+      height: calc(360vw/19.2);
+      width: calc(360vw/19.2);
+      bottom: 0;
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+    .machine-left {
+      background-image: url(./img/Nature_tears.png);
+      left: 0;
+    }
+    .machine-right {
+      background-image: url(./img/Nature_creepsmile.png);
+      right: 0;
     }
 
     .slot-machine {
@@ -131,10 +151,13 @@
       display: inline-block;
       overflow: hidden;
       box-shadow: 10px 10px 10px #0009;
-      background-color: #81db50;
+      background-image: url(./img/895286853211684895.webp);
+      background-size: 175%;
+      background-position: 34% 51%;
+      rotate: -30deg;
     }
 
-    .bar-item-circle::before {
+    /* .bar-item-circle::before {
       content: '';
       background-color: #81db50;
       border-radius: 100%;
@@ -145,7 +168,7 @@
       bottom: 5%;
       border: 0.3em solid #81db50;
       filter: blur(7px);
-    }
+    } */
 
     .bar-item-verticle {
       left: 32%;
@@ -339,22 +362,85 @@
       -webkit-appearance: none;
       margin: 0;
     }
+
+    .melonChange {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-image: url(./img/895286853211684895.webp);
+      background-repeat: no-repeat;
+      background-size: contain;
+      
+    }
+    .movingMelon {
+      position: absolute;
+      height: 99vh;
+      width: 189vh;
+      background-image: url(./img/Nature_melonhaha.png);
+      left: -94%;
+      z-index: 5;
+      background-position: center;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-name: melonMoving;
+    }
+
+    @keyframes melonMoving {
+      from {
+        left: -94%;
+      }
+      to {
+        left: 100%;
+      }
+    }
+
+    @keyframes melonMovingBack {
+      from {
+        left: 100%;
+      }
+      to {
+        left: -94%;
+      }
+    }
+
+    .inputArea, .multipleTransform.auto, .winnerForm {
+      background-color: transparent;
+      width: 100%;
+    }
+    .inputArea-Background, .multipleTransform-Background, .winnerForm-Background{
+      display: flex;
+      background-color: #fff;
+      background-image: url(./img/Nature_LUL.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+    }
+    .multipleTransform-Background {
+      background-image: url(./img/Nature_tea.png);
+    }
+    .winnerForm-Background {
+      background-image: url(./img/Nature_angry.png);
+    }
+
+
   </style>
 </head>
 
 <body>
-
+  <div class="movingMelon"></div>
+  <div class="melonChange"></div>
   <div class="title">阿熊的抽獎小網ʕ•ᴥ•ʔ</div>
   <div class="row" style="justify-content: space-around; width: 100%; margin: 0;">
     <div class="col-4">
-      <div class="card">
+      <div class="card inputCard">
         <h3 class="card-title"><i class="fa-solid fa-table"></i> 資料轉換區</h3>
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示:
           可以直接複製Excel或Google試算表喔</h5>
+        <div class="inputArea-Background">
         <textarea class="inputArea" name="excelInput" id="excelInput" cols="30" rows="10" placeholder="請輸入 名字 + 數量
           ex:
           參加者A 2
-          參加者B 5"></textarea>
+          參加者B 5"></textarea></div>
         <button type="button" onclick="outputDrawList()" class="btn multipleTransformBtn">轉換名單</button>
       </div>
     </div>
@@ -367,15 +453,17 @@
         </div>
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示: 可從右上角切換成手動輸入
         </h5>
-        <textarea readonly class="multipleTransform auto" name="multipleTransform" id="multipleTransform" cols="30"
-          rows="10" placeholder="格式為
-          1 參加者A
-          2 參加者A
-          1 參加者B
-          2 參加者B
-          3 參加者B
-          4 參加者B
-          5 參加者B"></textarea>
+        <div class="multipleTransform-Background">
+          <textarea readonly class="multipleTransform auto" name="multipleTransform" id="multipleTransform" cols="30"
+            rows="10" placeholder="格式為
+            1 參加者A
+            2 參加者A
+            1 參加者B
+            2 參加者B
+            3 參加者B
+            4 參加者B
+            5 參加者B"></textarea>
+        </div>
         <button type="button" class="copy btn multipleTransformBtn" onclick="copy('participant')">複製名單</button>
       </div>
       <div class="card hand-input disable">
@@ -401,10 +489,11 @@
           <i class="fa-solid fa-pen-to-square"></i>
           <i class="fa-solid fa-check disable"></i>
         </div>
-        <textarea readonly class="winnerForm" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
-        <textarea class="winnerFormEdit disable" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
-        <textarea class="winnerNamesForm" name="winnerForm" id="winnerForm" cols="10" rows="2" style="position: absolute;
-        z-index: -99;"></textarea>
+        <div class="winnerForm-Background">
+          <textarea readonly class="winnerForm" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
+          <textarea class="winnerFormEdit disable" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
+          <textarea class="winnerNamesForm disable" name="winnerForm" id="winnerForm" cols="10" rows="2";></textarea>
+        </div>
         <div class="btn-group" role="group" aria-label="Basic outlined example">
           <div class="col-6">
             <button type="button" class="copy btn multipleTransformBtn"
@@ -436,6 +525,8 @@
   </div>
   <div class="col-12" style="margin: 0; display:flex;">
     <div class="card slot-machine">
+      <div class="machine-left"></div>
+      <div class="machine-right"></div>
       <h3 class="card-title"><i class="fa-solid fa-trophy"></i> 抽獎拉霸機!</h3>
       <div class="award-name">當前獎項: <input class="name-of-award" type="text"></div>
       <h5 style=" text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示: 點擊右方把手即可開始抽獎</h5>
@@ -703,10 +794,8 @@
     let deleteBtn = document.querySelector('.deleteBtn')
     auto.classList.remove('disable')
     hand.classList.remove('disable')
-    deleteBtn.classList.remove('disable')
     if (nowMode === 'auto') {
       auto.classList.add('disable')
-      deleteBtn.classList.add('disable')
       nowMode = 'hand'
       toastr.info('進入手動輸入模式')
     } else {
@@ -884,6 +973,29 @@
     }
     renewWinnerForm()
   }
+
+  ///搞耍時刻
+  let melonChange = document.querySelector('.melonChange')
+  let melonCount = 0
+  melonChange.addEventListener('click',function(){
+    melonCount = melonCount + 1
+    if(melonCount <= 3){
+      toastr.success(`已哈哈${melonCount}次`)
+    } else if (melonCount <= 5){
+      toastr.warning(`我看你很會哈哈喔 ${melonCount}`)
+    } else if (melonCount <= 7){
+      toastr.error(`到底要哈幾次 ${melonCount}`)
+    } else if(melonCount <= 8){
+      toastr.success(`自然好棒`)
+    } else if(melonCount <= 9){
+      toastr.success(`自然可愛`)
+    } else if(melonCount <= 10){
+      toastr.success(`好喜歡自然!!!!!`)
+    } else{
+      toastr.success(`暈了暈了暈了`)
+    }
+  
+  })
 
 
 </script>
