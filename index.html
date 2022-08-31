@@ -16,7 +16,10 @@
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
-
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <title>熊熊的圖奇抽獎小網站</title>
   <style>
     html {
@@ -382,6 +385,7 @@
       height: 99vh;
       width: 189vh;
       background-image: url(./img/Nature_melonhaha.png);
+      background-size: cover;
       left: -94%;
       z-index: 5;
       background-position: center;
@@ -412,7 +416,8 @@
 
     .inputArea,
     .multipleTransform.auto,
-    .winnerForm {
+    .winnerForm,
+    .winnerFormEdit {
       background-color: transparent;
       width: 100%;
       position: relative;
@@ -447,6 +452,63 @@
     .machine-right.melon {
       background-image: url(./img/Nature_melonhaha.png);
       background-color: transparent;
+      overflow:hidden;
+      animation-iteration-count: infinite;
+    }
+    .machine-left.melon,
+    .machine-right.melon {
+      background-image: url(./img/Nature_melonhaha.png);
+      background-color: transparent;
+      animation-name: melonShack;
+      animation-duration: 5s;
+      animation-timing-function: linear;
+    }
+    .machine-left.melon
+    {
+      animation-name: melonShackReverse;
+    }
+    
+    body.melon
+    {
+      background-color: #3ca732;
+      color: #F2A03D;
+    }
+
+    .title.melon {
+      color: #FCC242;
+    }
+
+
+    .card-title.melon {
+      background-color: #F2EDA7;
+    }
+    .btn.melon {
+      background-color: #B4D930;
+    }
+    @keyframes melonShack {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(720deg);
+      }
+    }
+
+    @keyframes melonShackReverse {
+      0% {
+        transform: rotate(-50deg);
+      }
+      100% {
+        transform: rotate(-770deg);
+      }
+    }
+
+    html.melon {
+      cursor: url(./img/920282799859187752.webp), auto;
+    }
+    .bar-item-circle.melon {
+      background-image: url(./img/824336864252395560.webp);
+      background-size: 100%;
     }
   </style>
 </head>
@@ -462,7 +524,7 @@
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示:
           可以直接複製Excel或Google試算表喔</h5>
         <div style="position: relative;">
-          <div class="inputArea-Background">
+          <div class="inputArea-Background animate__animated">
           </div>
           <textarea class="inputArea" name="excelInput" id="excelInput" cols="30" rows="10" placeholder="請輸入 名字 + 數量
           ex:
@@ -482,7 +544,7 @@
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示: 可從右上角切換成手動輸入
         </h5>
         <div style="position: relative;">
-          <div class="multipleTransform-Background">
+          <div class="multipleTransform-Background animate__animated">
           </div>
           <textarea readonly class="multipleTransform auto" name="multipleTransform" id="multipleTransform" cols="30"
             rows="10" placeholder="格式為
@@ -520,7 +582,7 @@
           <i class="fa-solid fa-check disable"></i>
         </div>
         <div style="position: relative;">
-          <div class="winnerForm-Background">
+          <div class="winnerForm-Background animate__animated">
           </div>
           <textarea readonly class="winnerForm" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
           <textarea class="winnerFormEdit disable" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
@@ -556,7 +618,7 @@
     </div>
   </div>
   <div class="col-12" style="margin: 0; display:flex;">
-    <div class="card slot-machine">
+    <div class="card slot-machine" style=" overflow: hidden;">
       <div class="machine-left"></div>
       <div class="machine-right"></div>
       <h3 class="card-title"><i class="fa-solid fa-trophy"></i> 抽獎拉霸機!</h3>
@@ -1013,21 +1075,26 @@
   let inputAreaBackground = document.querySelector('.inputArea-Background')
   let machineL = document.querySelector('.machine-left')
   let machineR = document.querySelector('.machine-right')
+  let title = document.querySelector('.title')
   let melonCount = 0
   let melonState = false
+  let bodyColor = document.querySelector('body')
+  let cursor = document.querySelector('html')
+  let btns = document.querySelectorAll('.btn')
+  let cardTitles = document.querySelectorAll('.card-title')
   melonChange.addEventListener('click', function () {
     melonCount = melonCount + 1
-    if (melonCount <= 3) {
+    if (melonCount <= 2) {
       toastr.success(`已哈哈${melonCount}次`)
-    } else if (melonCount <= 5) {
+    } else if (melonCount <= 4) {
       toastr.warning(`我看你很會哈哈喔 ${melonCount}`)
-    } else if (melonCount <= 7) {
+    } else if (melonCount <= 6) {
       toastr.error(`到底要哈幾次 ${melonCount}`)
-    } else if (melonCount <= 8) {
+    } else if (melonCount <= 7) {
       toastr.success(`自然好棒`)
-    } else if (melonCount <= 9) {
+    } else if (melonCount <= 8) {
       toastr.success(`自然可愛`)
-    } else if (melonCount <= 10) {
+    } else if (melonCount <= 9) {
       toastr.success(`好喜歡自然!!!!!`)
     } else {
       toastr.success(`暈了暈了暈了`)
@@ -1038,14 +1105,58 @@
       winnerFormBackground.classList.add('melon')
       transformBackground.classList.add('melon')
       inputAreaBackground.classList.add('melon')
+      cursor.classList.add('melon')
+      winnerFormBackground.classList.add('animate__shakeX')
+      transformBackground.classList.add('animate__bounce')
+      inputAreaBackground.classList.add('animate__shakeY')
       machineL.classList.add('melon')
       machineR.classList.add('melon')
+      bodyColor.classList.add('melon')
+      title.classList.add('melon')
+      ball.classList.add('melon')
+      title.innerText = "哈密瓜派對!!!!!"
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].classList.add('melon')
+      }
+      for (let i = 0; i < cardTitles.length; i++) {
+        cardTitles[i].classList.add('melon')
+        console.log(cardTitles[i]);
+        if(i === 0) {
+          cardTitles[i].innerText = "哈密種子"
+        } else if(i === 1) {
+          cardTitles[i].innerText = "哈密花"
+        } else if (i === 3) {
+          cardTitles[i].innerText = "哈密瓜瓜"
+        } else if (i === 4) {
+          cardTitles[i].innerText = "你要不要吃哈!密!哈!"
+        }
+      }
     } else {
       winnerFormBackground.classList.remove('melon')
       transformBackground.classList.remove('melon')
       inputAreaBackground.classList.remove('melon')
+      cursor.classList.remove('melon')
       machineL.classList.remove('melon')
       machineR.classList.remove('melon')
+      bodyColor.classList.remove('melon')
+      ball.classList.remove('melon')
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('melon')
+      }
+      for (let i = 0; i < cardTitles.length; i++) {
+        cardTitles[i].classList.remove('melon')
+        if(i === 0) {
+          cardTitles[i].innerText = "資料轉換區"
+        } else if(i === 1) {
+          cardTitles[i].innerText = "待抽獎名單!"
+        } else if (i === 3) {
+          cardTitles[i].innerText = "中獎名單!"
+        } else if (i === 4) {
+          cardTitles[i].innerText = "抽獎拉霸機!"
+        }
+      }
+      title.classList.remove('melon')
+      title.innerText = "阿熊的抽獎小網ʕ•ᴥ•ʔ"
     }
 
   })
