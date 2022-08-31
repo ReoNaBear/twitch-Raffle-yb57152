@@ -22,13 +22,21 @@
   />
   <title>熊熊的圖奇抽獎小網站</title>
   <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     html {
       cursor: url(./img/cursor2.webp), auto;
+      margin: 0;
+      padding: 0;
     }
 
     body {
       background-color: #ffffac;
       margin: 0;
+      padding: 0;
       font-family: 'Noto Sans TC', sans-serif;
       color: #0d97db;
 
@@ -391,7 +399,17 @@
       background-position: center;
       animation-duration: 2s;
       animation-timing-function: linear;
+      
+    }
+    .movingMelon:hover {
+      animation-play-state: running;
+    }
+    .movingMelon.nature{
       animation-name: melonMoving;
+    }
+
+    .movingMelon.melon{
+      animation-name: melonMovingBack;
     }
 
     @keyframes melonMoving {
@@ -510,10 +528,128 @@
       background-image: url(./img/824336864252395560.webp);
       background-size: 100%;
     }
+
+
+    @-webkit-keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes rotate2 {
+      0% {
+        transform: rotate(0deg);
+        border-top-color: rgba(0, 0, 0, 0.5);
+      }
+      50% {
+        transform: rotate(180deg);
+        border-top-color: rgba(0, 0, 255, 0.5);
+      }
+      100% {
+        transform: rotate(360deg);
+        border-top-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+    @keyframes rotate2 {
+      0% {
+        transform: rotate(0deg);
+        border-top-color: rgba(0, 0, 0, 0.5);
+      }
+      50% {
+        transform: rotate(180deg);
+        border-top-color: rgba(0, 0, 255, 0.5);
+      }
+      100% {
+        transform: rotate(360deg);
+        border-top-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+    .loader {
+      position: relative;
+      margin: 75px auto;
+      width: 150px;
+      height: 150px;
+      display: block;
+      overflow: hidden;
+    }
+    .loader div {
+      height: 100%;
+    }
+    /* loader */
+    .loader4,
+    .loader4 div {
+      border-radius: 50%;
+      padding: 8px;
+      border: 2px solid transparent;
+      -webkit-animation: rotate linear 3.5s infinite;
+              animation: rotate linear 3.5s infinite;
+      border-radius: 50%;
+      padding: 4px;
+      -webkit-animation: rotate2 4s infinite linear;
+              animation: rotate2 4s infinite linear;
+    }
+
+    div:hover {
+      -webkit-animation-play-state: paused;
+              animation-play-state: paused;
+    }
+
+    .loader,
+    .loader * {
+      will-change: transform;
+    }
+    .loaderBackground {
+      width: 100%;
+      height: 100%;
+      background-color: #ffffac;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      z-index: 5;
+    }
   </style>
 </head>
 
 <body>
+  <div class="loaderBackground">
+    <div class='loader loader4'>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div>
+                        <div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="movingMelon"></div>
   <div class="melonChange"></div>
   <div class="title">阿熊的抽獎小網ʕ•ᴥ•ʔ</div>
@@ -652,6 +788,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 <script>
+  
+  let movingMelon = document.querySelector('.movingMelon')
   let nowMode = 'auto'
   let winnerMode = 'read'
   let editIcon = document.querySelector('.fa-pen-to-square')
@@ -1114,6 +1252,8 @@
       bodyColor.classList.add('melon')
       title.classList.add('melon')
       ball.classList.add('melon')
+      movingMelon.classList.remove('nature')
+      movingMelon.classList.add('melon')
       title.innerText = "哈密瓜派對!!!!!"
       for (let i = 0; i < btns.length; i++) {
         btns[i].classList.add('melon')
@@ -1157,9 +1297,17 @@
       }
       title.classList.remove('melon')
       title.innerText = "阿熊的抽獎小網ʕ•ᴥ•ʔ"
+      movingMelon.classList.remove('melon')
+      movingMelon.classList.add('nature')
     }
 
   })
+
+  window.onload = function(){
+    let loader = document.querySelector('.loaderBackground')
+    loader.remove()
+    movingMelon.classList.add('nature')
+  }
 
 
 </script>
