@@ -828,7 +828,6 @@
 
   totalPick.addEventListener('change', function () {
     totalPickNumber = Number(totalPick.value)
-    console.log(totalPickNumber);
   })
 
   //拉霸動畫控制
@@ -918,7 +917,6 @@
             }
             else {
               text = '到底誰可以從天台離開呢?!'
-              console.log(numbers);
               setWinnerList(numbers, drawList)
             }
             drawAnimationDetail(text)
@@ -1087,7 +1085,6 @@
     if (!!excelData.trim()) {
       let separate = excelData.trim().split(/\s+/)
       let complicateData = separate
-      console.log(complicateData);
       separate.forEach((e, index) => {
         if (e.split("")[0] == '(') {
           complicateData[index - 1] = complicateData[index - 1] + e
@@ -1129,17 +1126,15 @@
       nowDrawNumber.innerText = drawAmount
     }
     drawAmount = drawAmount + totalPickNumber
-    console.log(typeof totalPickNumber);
-    console.log(typeof drawAmount);
     nowDrawNumber.innerText = drawAmount
     let winners = []
     let count = 0
     for (let i = 0; i < totalPickNumber * 10; i++) {
       let name = drawList[winnerNumberList[i]]
-      console.log(i);
       if (!winnerList.includes(name)) {
         count = count + 1
         winnerList.push(name)
+        console.log(`第${count}位中獎者: ${name}`);
       }
       if (Number(count) === Number(totalPickNumber)) {
         break
@@ -1260,7 +1255,6 @@
       }
       for (let i = 0; i < cardTitles.length; i++) {
         cardTitles[i].classList.add('melon')
-        console.log(cardTitles[i]);
         if(i === 0) {
           cardTitles[i].innerText = "哈密種子"
         } else if(i === 1) {
