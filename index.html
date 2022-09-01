@@ -48,8 +48,8 @@
       font-size: calc(35vw/19.2);
       margin: calc(20vw/19.2) 0;
       border: calc(3vw/19.2) solid #edb294;
-      border-left: 0px;
-      border-right: 0px;
+      border-left: 0vw;
+      border-right: 0vw;
       /* color: #9bd7f5; */
     }
 
@@ -65,7 +65,7 @@
       background-color: #f7d1a4;
       line-height: calc(50vw/19.2);
       font-size: calc(25vw/19.2);
-      border-radius: calc(8vw/19.2) calc(8vw/19.2) 0px 0px;
+      border-radius: calc(8vw/19.2) calc(8vw/19.2) 0vw 0vw;
     }
 
     h5 {
@@ -87,7 +87,7 @@
       width: 100%;
       left: 0;
       top: 0;
-      border-radius: 0px 0px calc(8vw/19.2) calc(8vw/19.2);
+      border-radius: 0vw 0vw calc(8vw/19.2) calc(8vw/19.2);
     }
 
     .machine-right,
@@ -138,26 +138,21 @@
     .disable {
       display: none;
     }
-
     .btn {
       line-height: 2.2;
-      border-radius: 0px 0px 8px 8px;
     }
-
-    .multipleTransform.hand {
-      border-radius: 0px 0px 8px 8px;
-    }
-
+    .multipleTransform.hand,
+    .btn,
     .deleteBtn {
-      border-radius: 0px 0px 0px 8px;
+      border-radius: 0vw 0vw calc(8vw/19.2) calc(8vw/19.2);
     }
 
     .bar-item-circle {
-      height: 55px;
-      width: 55px;
+      height:  calc(55vw/19.2);
+      width:  calc(55vw/19.2);
       border-radius: 50%;
       top: 10%;
-      left: calc(32% - 17.5px);
+      left: calc(32% -  calc(17.5vw/19.2));
       z-index: 2;
       position: absolute;
       animation-duration: 2s;
@@ -165,7 +160,7 @@
 
       display: inline-block;
       overflow: hidden;
-      box-shadow: 10px 10px 10px #0009;
+      box-shadow: calc(10vw/19.2) calc(10vw/19.2) calc(10vw/19.2) #0009;
       background-image: url(./img/895286853211684895.webp);
       background-size: 175%;
       background-position: 34% 51%;
@@ -196,8 +191,8 @@
     .bar-item-verticle .ellipse {
       position: absolute;
       bottom: 0%;
-      width: 20px;
-      height: 20px;
+      width: calc(20vw/19.2);
+      height: calc(20vw/19.2);
       background: #427128;
       border-radius: 50px;
       transform: rotateX(256deg);
@@ -209,8 +204,8 @@
       display: inline-block;
       overflow: hidden;
       background-color: #81db50;
-      box-shadow: 14px 6px 10px #0009;
-      width: 20px;
+      box-shadow: calc(14vw/19.2) calc(6vw/19.2) calc(10vw/19.2) #0009;
+      width: calc(20vw/19.2);
       height: calc(195vw/19.2);
       position: absolute;
       opacity: 0.9;
@@ -267,15 +262,15 @@
     }
 
     .bar-item-connector .rectangle {
-      box-shadow: -6px 39px 10px #0009;
+      box-shadow: calc(-6vw/19.2) calc(39vw/19.2) calc(10vw/19.2) #0009;
       height: calc(310vw/19.2);
-      width: 20px;
+      width: calc(20vw/19.2);
       position: absolute;
       opacity: 0.9;
       background: #81db50;
       top: 0;
       left: 0;
-      border-radius: 50px;
+      border-radius: calc(50vw/19.2);
       z-index: -1;
     }
 
@@ -380,8 +375,8 @@
 
     .melonChange {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: calc(75vw/19.2);
+      height: calc(75vw/19.2);
       background-image: url(./img/895286853211684895.webp);
       background-repeat: no-repeat;
       background-size: contain;
@@ -582,9 +577,9 @@
     }
     .loader {
       position: relative;
-      margin: 75px auto;
-      width: 150px;
-      height: 150px;
+      margin: calc(75vw/19.2) auto;
+      width: calc(150vw/19.2);
+      height: calc(150vw/19.2);
       display: block;
       overflow: hidden;
     }
@@ -595,12 +590,12 @@
     .loader4,
     .loader4 div {
       border-radius: 50%;
-      padding: 8px;
-      border: 2px solid transparent;
+      padding: calc(8vw/19.2);
+      border: calc(2vw/19.2) solid transparent;
       -webkit-animation: rotate linear 3.5s infinite;
               animation: rotate linear 3.5s infinite;
       border-radius: 50%;
-      padding: 4px;
+      padding: calc(4vw/19.2);
       -webkit-animation: rotate2 4s infinite linear;
               animation: rotate2 4s infinite linear;
     }
@@ -883,8 +878,7 @@
   let chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890() ';  // All possible Charactrers
   let scale = 40;  // Font size and overall scale
   let breaks = 0.0009;  // Speed loss per frame
-  let endSpeed = 0.000
-  5;  // Speed at which the letter stops
+  let endSpeed = 0.0005;  // Speed at which the letter stops
   let firstLetter = 250;  // Number of frames untill the first letter stops (60 frames per second)
   let delay = 80;  // Number of frames between letters stopping
 
