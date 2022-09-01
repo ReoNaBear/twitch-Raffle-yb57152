@@ -1324,6 +1324,7 @@
   let cursor = document.querySelector('html')
   let btns = document.querySelectorAll('.btn')
   let cardTitles = document.querySelectorAll('.card-title')
+  let lastMelonState = false
   melonChange.addEventListener('click', function () {
     melonCount = melonCount + 1
     if (melonCount <= 2) {
@@ -1343,76 +1344,78 @@
       melonCount = 0
       melonState = !melonState
     }
-    if (melonState) {
-      winnerFormBackground.classList.add('melon')
-      transformBackground.classList.add('melon')
-      inputAreaBackground.classList.add('melon')
-      melonSpeedControl.classList.add('melon')
-      cursor.classList.add('melon')
-      winnerFormBackground.classList.add('animate__shakeX')
-      transformBackground.classList.add('animate__bounce')
-      inputAreaBackground.classList.add('animate__shakeY')
-      machineL.classList.add('melon')
-      machineR.classList.add('melon')
-      bodyColor.classList.add('melon')
-      title.classList.add('melon')
-      ball.classList.add('melon')
-      movingMelon.classList.remove('nature')
-      movingMelon.classList.add('melon')
-      title.innerText = "哈密瓜派對!!!!!"
-      for (let i = 0; i < btns.length; i++) {
-        btns[i].classList.add('melon')
-      }
-      for (let i = 0; i < cardTitles.length; i++) {
-        cardTitles[i].classList.add('melon')
-        if (i === 0) {
-          cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/825781977395232778.webp);"></div> 哈密種子'
-        } else if (i === 1) {
-          cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/825814307593912431.webp);"></div> 哈密花'
-        } else if (i === 3) {
-          cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/825814307266494518.webp);"></div> 哈密瓜瓜'
-        } else if (i === 4) {
-          cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/837742619215921202.gif);"></div> 你要不要吃哈!密!哈! <div class="bird" style="background-image: url(./img/837742619215921202.gif);"></div>'
+    if(lastMelonState !== melonState){
+      lastMelonState = melonState
+      if (melonState) {
+        winnerFormBackground.classList.add('melon')
+        transformBackground.classList.add('melon')
+        inputAreaBackground.classList.add('melon')
+        melonSpeedControl.classList.add('melon')
+        cursor.classList.add('melon')
+        winnerFormBackground.classList.add('animate__shakeX')
+        transformBackground.classList.add('animate__bounce')
+        inputAreaBackground.classList.add('animate__shakeY')
+        machineL.classList.add('melon')
+        machineR.classList.add('melon')
+        bodyColor.classList.add('melon')
+        title.classList.add('melon')
+        ball.classList.add('melon')
+        movingMelon.classList.remove('nature')
+        movingMelon.classList.add('melon')
+        title.innerText = "哈密瓜派對!!!!!"
+        for (let i = 0; i < btns.length; i++) {
+          btns[i].classList.add('melon')
         }
-      }
-      text = "哈哈哈哈密瓜!!!"
-      drawAnimationDetail(text)
-    } else {
-      winnerFormBackground.classList.remove('melon')
-      transformBackground.classList.remove('melon')
-      inputAreaBackground.classList.remove('melon')
-      cursor.classList.remove('melon')
-      machineL.classList.remove('melon')
-      machineR.classList.remove('melon')
-      bodyColor.classList.remove('melon')
-      winnerFormBackground.classList.remove('animate__shakeX')
-      transformBackground.classList.remove('animate__bounce')
-      inputAreaBackground.classList.remove('animate__shakeY')
-      ball.classList.remove('melon')
-      melonSpeedControl.classList.remove('melon')
-      for (let i = 0; i < btns.length; i++) {
-        btns[i].classList.remove('melon')
-      }
-      for (let i = 0; i < cardTitles.length; i++) {
-        cardTitles[i].classList.remove('melon')
-        if (i === 0) {
-          cardTitles[i].innerHTML = '<i class="fa-solid fa-table"></i> 資料轉換區'
-        } else if (i === 1) {
-          cardTitles[i].innerHTML = '<i class="fa-solid fa-list-ol"></i> 待抽獎名單!'
-        } else if (i === 3) {
-          cardTitles[i].innerHTML = '<i class="fa-solid fa-list-ol"></i> 中獎名單!'
-        } else if (i === 4) {
-          cardTitles[i].innerHTML = '<i class="fa-solid fa-trophy"></i> 抽獎拉霸機!'
+        for (let i = 0; i < cardTitles.length; i++) {
+          cardTitles[i].classList.add('melon')
+          if (i === 0) {
+            cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/825781977395232778.webp);"></div> 哈密種子'
+          } else if (i === 1) {
+            cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/825814307593912431.webp);"></div> 哈密花'
+          } else if (i === 3) {
+            cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/825814307266494518.webp);"></div> 哈密瓜瓜'
+          } else if (i === 4) {
+            cardTitles[i].innerHTML = '<div class="bird" style="background-image: url(./img/837742619215921202.gif);"></div> 你要不要吃哈!密!哈! <div class="bird" style="background-image: url(./img/837742619215921202.gif);"></div>'
+          }
         }
+        text = "哈哈哈哈密瓜!!!"
+        drawAnimationDetail(text)
+      } else {
+        winnerFormBackground.classList.remove('melon')
+        transformBackground.classList.remove('melon')
+        inputAreaBackground.classList.remove('melon')
+        cursor.classList.remove('melon')
+        machineL.classList.remove('melon')
+        machineR.classList.remove('melon')
+        bodyColor.classList.remove('melon')
+        winnerFormBackground.classList.remove('animate__shakeX')
+        transformBackground.classList.remove('animate__bounce')
+        inputAreaBackground.classList.remove('animate__shakeY')
+        ball.classList.remove('melon')
+        melonSpeedControl.classList.remove('melon')
+        for (let i = 0; i < btns.length; i++) {
+          btns[i].classList.remove('melon')
+        }
+        for (let i = 0; i < cardTitles.length; i++) {
+          cardTitles[i].classList.remove('melon')
+          if (i === 0) {
+            cardTitles[i].innerHTML = '<i class="fa-solid fa-table"></i> 資料轉換區'
+          } else if (i === 1) {
+            cardTitles[i].innerHTML = '<i class="fa-solid fa-list-ol"></i> 待抽獎名單!'
+          } else if (i === 3) {
+            cardTitles[i].innerHTML = '<i class="fa-solid fa-list-ol"></i> 中獎名單!'
+          } else if (i === 4) {
+            cardTitles[i].innerHTML = '<i class="fa-solid fa-trophy"></i> 抽獎拉霸機!'
+          }
+        }
+        title.classList.remove('melon')
+        title.innerText = "阿熊的抽獎小網ʕ•ᴥ•ʔ"
+        movingMelon.classList.remove('melon')
+        movingMelon.classList.add('nature')
+        text = "好想自然!!!"
+        drawAnimationDetail(text)
       }
-      title.classList.remove('melon')
-      title.innerText = "阿熊的抽獎小網ʕ•ᴥ•ʔ"
-      movingMelon.classList.remove('melon')
-      movingMelon.classList.add('nature')
-      text = "好想自然!!!"
-      drawAnimationDetail(text)
     }
-
   })
 
   melonSpeedControl.addEventListener('change', function(){
