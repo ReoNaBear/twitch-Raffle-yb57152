@@ -1159,6 +1159,7 @@
     if (array[0] !== '') {
       if (index === 1) {
         for (let i = 0; i < array.length; i += 2) {
+          if(i === array.length - 1) break
           if (isNaN(array[i + 1])) {
             finalData = finalData + `1 ${array[i]}\n`
             i = i - 1
@@ -1189,9 +1190,14 @@
     let excelData = excelInputArea.value
     if (!!excelData.trim()) {
       let separate = excelData.trim().split(/\s+/)
+      console.log(separate);
       let complicateData = separate
       separate.forEach((e, index) => {
         if (e.split("")[0] == '(') {
+          complicateData[index - 1] = complicateData[index - 1] + e
+          complicateData.splice(index, 1)
+        }
+        if(e.split("")[0] == ')'){
           complicateData[index - 1] = complicateData[index - 1] + e
           complicateData.splice(index, 1)
         }
@@ -1211,7 +1217,7 @@
         document.execCommand('Copy')
         toastr.success('成功複製抽獎者名單')
       } else if (e === 'winner') {
-        document.querySelector('.winnerNamesForm').select()
+        winnerForm.select()
         document.execCommand('Copy')
         toastr.success('成功複製中獎者名單')
       }
