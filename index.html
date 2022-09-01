@@ -1280,14 +1280,17 @@
     if (!!winnerFormEdit.value) {
       let separate = winnerFormEdit.value.trim().split(/\s+/)
       let newWinnerList = []
+      drawAmount = 0
       for (let i = 0; i < separate.length; i++) {
         if (!separate[i].includes('=====')) {
           newWinnerList.push(`${separate[i]}`)
-
+          drawAmount = drawAmount + 1
         } else {
           newWinnerList.push(separate[i])
+          drawAmount = 0
         }
       }
+      nowDrawNumber.innerText = drawAmount
       winnerList = newWinnerList
     } else {
       winnerList = [`=====${nowAward}=====`]
