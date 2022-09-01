@@ -503,6 +503,22 @@
       background-color: #B4D930;
     }
 
+    .machine-left.melon.fast {
+      animation-name: melonShackReverseFast;
+    }
+
+    .machine-left.melon.turbo {
+      animation-name: melonShackReverseTurbo;
+    }
+
+    .machine-right.melon.fast {
+      animation-name: melonShackFast;
+    }
+
+    .machine-right.melon.turbo {
+      animation-name: melonShackTurbo;
+    }
+
     @keyframes melonShack {
       0% {
         transform: rotate(0deg);
@@ -513,6 +529,24 @@
       }
     }
 
+    @keyframes melonShackFast {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(3600deg);
+      }
+    }
+    @keyframes melonShackTurbo {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(14000deg);
+      }
+    }
     @keyframes melonShackReverse {
       0% {
         transform: rotate(-50deg);
@@ -522,6 +556,27 @@
         transform: rotate(-770deg);
       }
     }
+
+    @keyframes melonShackReverseFast {
+      0% {
+        transform: rotate(-50deg);
+      }
+
+      100% {
+        transform: rotate(-3620deg);
+      }
+    }
+
+    @keyframes melonShackReverseTurbo {
+      0% {
+        transform: rotate(-50deg);
+      }
+
+      100% {
+        transform: rotate(-14400deg);
+      }
+    }
+
 
     html.melon {
       cursor: url(./img/920282799859187752.webp), auto;
@@ -640,6 +695,17 @@
       align-items: center;
       position: absolute;
       z-index: 5;
+    }
+
+    .melon-speed {
+      width: calc( 250vw/19.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+    .melon-speed.melon {
+      display: block;
     }
   </style>
 </head>
@@ -775,6 +841,11 @@
     <div class="card slot-machine" style=" overflow: hidden;">
       <div class="machine-left"></div>
       <div class="machine-right"></div>
+      <select class="form-select melon-speed">
+        <option selected value="1">普通瓜瓜</option>
+        <option value="2">成熟瓜瓜</option>
+        <option value="3">瓜瓜high起乃</option>
+      </select>
       <h3 class="card-title"><i class="fa-solid fa-trophy"></i> 抽獎拉霸機!</h3>
       <div class="award-name">當前獎項: <input class="name-of-award" type="text"></div>
       <h5 style=" text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示: 點擊右方把手即可開始抽獎</h5>
@@ -1220,6 +1291,7 @@
 
   ///搞耍時刻
   let melonChange = document.querySelector('.melonChange')
+  let melonSpeedControl = document.querySelector('.melon-speed')
   let winnerFormBackground = document.querySelector('.winnerForm-Background')
   let transformBackground = document.querySelector('.multipleTransform-Background')
   let inputAreaBackground = document.querySelector('.inputArea-Background')
@@ -1255,6 +1327,7 @@
       winnerFormBackground.classList.add('melon')
       transformBackground.classList.add('melon')
       inputAreaBackground.classList.add('melon')
+      melonSpeedControl.classList.add('melon')
       cursor.classList.add('melon')
       winnerFormBackground.classList.add('animate__shakeX')
       transformBackground.classList.add('animate__bounce')
@@ -1293,6 +1366,7 @@
       machineR.classList.remove('melon')
       bodyColor.classList.remove('melon')
       ball.classList.remove('melon')
+      melonSpeedControl.classList.remove('melon')
       for (let i = 0; i < btns.length; i++) {
         btns[i].classList.remove('melon')
       }
@@ -1316,6 +1390,21 @@
       drawAnimationDetail(text)
     }
 
+  })
+
+  melonSpeedControl.addEventListener('change', function(){
+    console.log(melonSpeedControl.value);
+    machineL.classList.remove('fast')
+    machineR.classList.remove('fast')
+    machineL.classList.remove('turbo')
+    machineR.classList.remove('turbo')
+    if(melonSpeedControl.value === "2"){
+      machineL.classList.add('fast')
+      machineR.classList.add('fast')
+    } else if(melonSpeedControl.value === "3"){
+      machineL.classList.add('turbo')
+      machineR.classList.add('turbo')
+    }
   })
 
   window.onload = function () {
