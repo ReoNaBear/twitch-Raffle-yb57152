@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="noscroll">
 
 <head>
   <meta charset="UTF-8">
@@ -29,6 +29,12 @@
       cursor: url(./img/cursor2.webp), auto;
       margin: 0;
       padding: 0;
+    }
+
+    html.noscroll {
+      position: fixed; 
+      overflow-y: scroll;
+      width: 100%;
     }
 
     body {
@@ -383,7 +389,7 @@
 
     .movingMelon {
       position: absolute;
-      height: 99vh;
+      height: 120vh;
       width: 189vh;
       background-image: url(./img/Nature_melonhaha.png);
       background-size: cover;
@@ -743,7 +749,7 @@
         <h3 class="card-title"><i class="fa-solid fa-table"></i> 資料轉換區</h3>
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示:
           可以直接複製Excel或Google試算表喔</h5>
-        <div style="position: relative;">
+        <div style="position: relative; display: flex;">
           <div class="inputArea-Background animate__animated">
           </div>
           <textarea class="inputArea" name="excelInput" id="excelInput" cols="30" rows="10" placeholder="請輸入 名字 + 數量
@@ -763,7 +769,7 @@
         </div>
         <h5 style="font-size:15px; text-align: center;"><i class="fa-solid fa-face-smile-wink"></i> 小提示: 可從右上角切換成手動輸入
         </h5>
-        <div style="position: relative;">
+        <div style="position: relative; display: flex;">
           <div class="multipleTransform-Background animate__animated">
           </div>
           <textarea readonly class="multipleTransform auto" name="multipleTransform" id="multipleTransform" cols="30"
@@ -801,7 +807,7 @@
           <i class="fa-solid fa-pen-to-square"></i>
           <i class="fa-solid fa-check disable"></i>
         </div>
-        <div style="position: relative;">
+        <div style="position: relative; display: flex;">
           <div class="winnerForm-Background animate__animated">
           </div>
           <textarea readonly class="winnerForm" name="winnerForm" id="winnerForm" cols="30" rows="8"></textarea>
@@ -1365,6 +1371,9 @@
       machineL.classList.remove('melon')
       machineR.classList.remove('melon')
       bodyColor.classList.remove('melon')
+      winnerFormBackground.classList.remove('animate__shakeX')
+      transformBackground.classList.remove('animate__bounce')
+      inputAreaBackground.classList.remove('animate__shakeY')
       ball.classList.remove('melon')
       melonSpeedControl.classList.remove('melon')
       for (let i = 0; i < btns.length; i++) {
@@ -1409,6 +1418,7 @@
 
   window.onload = function () {
     let loader = document.querySelector('.loaderBackground')
+    cursor.classList.remove('noscroll')
     loader.remove()
     movingMelon.classList.add('nature')
   }
